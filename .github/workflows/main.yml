@@ -8,7 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     env:
-      APPLICATION: ${{secrets.APPLICATION_MAIN}}
+      APPLICATION: ${{secrets.APPLICATION}}
+      APPLICATION_TEST: ${{secrets.APPLICATION_TEST}}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -17,8 +18,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin' # jdk 제공
       
-      - name: Create application.yml(for build)
-        run : touch ./src/main/resources/application.yml
+      - name: Create resources in test
+        run : mkdir ./src/test/resources
+        
+      - name: Create application.yml(for test)
+        run : touch ./src/test/resources/application.yml
+        
+      - name: Copy Secrets to applicatoin.yml(for test)
+        run : echo "${{env.APPLICATION_TEST}}" > ./src/test/resources/application.yml
+        
       - name: Copy Secrets to application.yml(for build)
         run : echo "${{env.APPLICATION}}" > ./src/main/resources/application.yml
       
