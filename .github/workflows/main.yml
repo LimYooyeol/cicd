@@ -15,9 +15,7 @@ jobs:
         uses: actions/setup-java@v3
         with: 
           java-version: '17'
-          distribution: 'temurin' # jdk 제공사
-      - name: Create resources directory
-        run:  mkdir ./src/main/resources
+          distribution: 'temurin' # jdk 제공
       
       - name: Create application.yml(for build)
         run : touch ./src/main/resources/application.yml
