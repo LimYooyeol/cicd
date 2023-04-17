@@ -20,7 +20,7 @@ jobs:
         run:  mkdir ./src/main/resources
       
       - name: Create application.yml(for build)
-        run : touch ./src/main/resoureces/application.yml
+        run : touch ./src/main/resources/application.yml
       - name: Copy Secrets to application.yml(for build)
         run : echo "${{env.APPLICATION}}" > ./src/main/resources/application.yml
       
