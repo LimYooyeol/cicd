@@ -16,6 +16,10 @@ jobs:
         with: 
           java-version: '17'
           distribution: 'temurin' # jdk 제공사
+      - name: Print working directory
+        run:  pwd
+      - name: Print ls
+        run:  ls
       
       - name: Create application.yml(for build)
         run : touch ./src/main/resoureces/application.yml
