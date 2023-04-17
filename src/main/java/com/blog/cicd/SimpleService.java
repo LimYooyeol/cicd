@@ -9,7 +9,7 @@ public class SimpleService {
     private String serviceName;
 
     public String getMessage(){
-        return "Hi, this is " + serviceName;
+        return "hi, this is " + serviceName;
     }
 
 }
