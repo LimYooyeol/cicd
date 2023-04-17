@@ -25,7 +25,7 @@ jobs:
       - name: Copy Secrets to applicatoin.yml(for test)
         env: 
           APPLICATION_TEST: ${{secrets.APPLICATION_TEST}}
-        run : echo "APPLICATION_TEST" > ./src/test/resources/application.yml
+        run : echo "$APPLICATION_TEST" > ./src/test/resources/application.yml
       
       - name: Show copy result(Do not use in real service)
         run : cat ./src/test/resources/application.yml
