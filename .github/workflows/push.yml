@@ -1,0 +1,12 @@
+name: deploy
+
+on:
+  push:
+    branches: ["master"]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Trigger tset
+        run : echo 'success'
