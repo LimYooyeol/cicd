@@ -28,11 +28,6 @@ jobs:
         
       - name: Copy Secrets to applicatoin.yml(for test)
         run : echo "$APPLICATION_TEST" > ./src/test/resources/application.yml
-      
-      - name: Show copy result(Do not use in real service)
-        run : |
-          printenv
-          cat ./src/test/resources/application.yml
         
       - name: Copy Secrets to application.yml(for build)
         run : echo "$APPLICATION" > ./src/main/resources/application.yml
