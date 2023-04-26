@@ -8,5 +8,5 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
     steps:
-      - name: Trigger tset
+      - name: Trigger tet
         run : echo 'success'
