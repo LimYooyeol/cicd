@@ -31,7 +31,7 @@ jobs:
       - name: Copy secretes to application.yml(test)
         run : echo "$APPLICATION_TEST" > ./src/test/resources/application.yml
         
-      - name: Create application.yml(build)
+      - name: Copy secrets to application.yml(build)
         run:  echo "$APPLICATION" > ./src/main/resources/application.yml
         
       - name : Grand permission
