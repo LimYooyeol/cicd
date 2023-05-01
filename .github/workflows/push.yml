@@ -7,6 +7,48 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-20.04
+    environment: CICD
+    env:
+      APPLICATION: ${{secrets.APPLICATION}}
+      APPLICATION_TEST: ${{secrets.APPLICATION_TEST}}
+      
     steps:
-      - name: Trigger tet
-        run : echo 'success'
+      - name: Checkout
+        uses: actions/checkout@v3
+  
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Create 'resoureces' dir for test
+        run : mkdir ./src/test/resources
+        
+      - name: Create application.yml(test)
+        run : touch ./src/test/resources/application.yml
+        
+      - name: Copy secretes to application.yml(test)
+        run : echo "$APPLICATION_TEST" > ./src/test/resources/application.yml
+        
+      - name: Create application.yml(build)
+        run:  echo "$APPLICATION" > ./src/main/resources/application.yml
+        
+      - name : Grand permission
+        run : chmod +x gradlew
+        
+      - name : Build
+        run:  ./gradlew clean build
+        
+      - name  : Make zip
+        run : zip -qq -r ./$GITHUB_SHA.zip .
+        
+      - name: Configure AWS crendentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{secrets.AWS_REGION}}
+          
+      - name: Upload to S3
+        run : aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://${{secrets.S3_BUCKET_NAME}}/$GITHUB_SHA.zip
