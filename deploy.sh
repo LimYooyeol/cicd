@@ -11,7 +11,7 @@ if [ -z $CURRENT_PID ]
 then
   echo ">Nothing working."
 else
-  kill -9 $CURRENT_PID
+  sudo kill -9 $CURRENT_PID
 fi
 
-nohup java -jar $JAR_PATH &
+sudo nohup java -jar $JAR_PATH &
