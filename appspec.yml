@@ -3,15 +3,16 @@ os: linux
 
 files:
   - source: /         # Repository(S3)
-    destination: /home/ubuntu   # EC2 instance
+    destination: /home/ubuntu/app   # EC2 instance
 
 permission:
-  - object: /home/ubuntu/
+  - object: /home/ubuntu/app/
     owner: ubuntu
     group: ubuntu
+    mode: 755
 
 hooks:
   ApplicationStart:
     - location: deploy.sh
       timeout: 60
-      runas: ubuntu
+      runas: root
