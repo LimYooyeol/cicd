@@ -1,6 +1,5 @@
 REPOSITORY=/home/ubuntu/app
 cd $REPOSITORY
-mkdir shelltest
 
 JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep '.jar' | tail -n 1)
 JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
